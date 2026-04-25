@@ -24,13 +24,13 @@ export default function App() {
           className="cursor-pointer group"
         >
           <h1 className="text-4xl font-light tracking-tighter mb-1 select-none group-hover:opacity-70 transition-opacity">
-            步履隨筆 <span className="text-xl text-ink-subtle ml-4 italic font-serif">Marathon Memories</span>
+            小籃子步履隨筆 <span className="text-xl text-ink-subtle ml-4 italic font-serif">Marathon Memories</span>
           </h1>
           <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase">記錄奔跑中的每一次呼吸與思考</p>
         </div>
         <div className="text-left md:text-right font-sans">
           <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2024</span>
-          <span className="text-sm text-ink-muted">台北 / 台灣</span>
+          <span className="text-sm text-ink-muted">南投 / 台灣</span>
         </div>
       </header>
 
@@ -57,7 +57,7 @@ export default function App() {
                     <img 
                       src={memory.imageUrl} 
                       alt="" 
-                      className="w-full h-full object-cover opacity-10 group-hover:opacity-20 grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
+                      className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-all duration-1000 scale-105 group-hover:scale-100"
                     />
                     <div className="absolute inset-0 bg-page-bg/20 group-hover:bg-transparent transition-colors duration-1000" />
                   </div>
@@ -95,45 +95,33 @@ export default function App() {
                  ← 返回目錄
               </button>
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                <div className="lg:col-span-5 flex flex-col space-y-12">
-                  <div className="space-y-6">
-                    <span className="text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase block">
-                      Memory Entry / {selectedMemory?.date}
-                    </span>
-                    <h2 className="text-5xl font-medium leading-[1.2] text-ink-primary mb-6">
-                      {selectedMemory?.title}
-                    </h2>
-                    <div className="flex space-x-8 text-[11px] text-ink-subtle font-sans tracking-[0.2em] uppercase">
-                      <div className="flex items-center gap-2">
-                        <span className="opacity-40 font-bold">LOC.</span> {selectedMemory?.location}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="opacity-40 font-bold">DIST.</span> {selectedMemory?.distance}
-                        {selectedMemory?.time && <span className="text-ink-extra-subtle font-light">[{selectedMemory?.time}]</span>}
-                      </div>
+              <div className="max-w-4xl mx-auto flex flex-col space-y-12">
+                <div className="space-y-6">
+                  <span className="text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase block">
+                    Memory Entry / {selectedMemory?.date}
+                  </span>
+                  <h2 className="text-5xl font-medium leading-[1.2] text-ink-primary mb-6">
+                    {selectedMemory?.title}
+                  </h2>
+                  <div className="flex space-x-8 text-[11px] text-ink-subtle font-sans tracking-[0.2em] uppercase">
+                    <div className="flex items-center gap-2">
+                      <span className="opacity-40 font-bold">LOC.</span> {selectedMemory?.location}
                     </div>
-                    
-                    {/* Highlighted Thoughts (No italic as requested) */}
-                    <div className="pt-8 border-t border-ui-border">
-                      <p className="text-2xl text-ink-primary font-medium leading-[1.6] text-justify font-serif">
-                        {selectedMemory?.thoughts}
-                      </p>
+                    <div className="flex items-center gap-2">
+                      <span className="opacity-40 font-bold">DIST.</span> {selectedMemory?.distance}
+                      {selectedMemory?.time && <span className="text-ink-extra-subtle font-light">[{selectedMemory?.time}]</span>}
                     </div>
-
-                    {/* Long Form Content */}
-                    {selectedMemory?.content && (
-                      <div className="pt-4">
-                        <div className="text-lg text-ink-muted leading-[1.8] text-justify space-y-6 whitespace-pre-line font-light">
-                          {selectedMemory.content}
-                        </div>
-                      </div>
-                    )}
                   </div>
-                </div>
-                
-                <div className="lg:col-span-7">
-                  <div className="relative aspect-[4/5] md:aspect-[16/9] overflow-hidden bg-ui-border/20 grayscale hover:grayscale-0 transition-[filter] duration-1000 shadow-2xl shadow-black/5">
+                  
+                  {/* Highlighted Thoughts (No italic as requested) */}
+                  <div className="pt-8 border-t border-ui-border">
+                    <p className="text-2xl text-ink-primary font-medium leading-[1.6] text-justify font-serif">
+                      {selectedMemory?.thoughts}
+                    </p>
+                  </div>
+
+                  {/* Image in the middle - No grayscale */}
+                  <div className="relative aspect-[16/9] overflow-hidden bg-ui-border/20 shadow-2xl shadow-black/5">
                     <img
                       src={selectedMemory?.imageUrl}
                       alt={selectedMemory?.title}
@@ -141,6 +129,15 @@ export default function App() {
                       referrerPolicy="no-referrer"
                     />
                   </div>
+
+                  {/* Long Form Content */}
+                  {selectedMemory?.content && (
+                    <div className="pt-4">
+                      <div className="text-lg text-ink-muted leading-[1.8] text-justify space-y-6 whitespace-pre-line font-light">
+                        {selectedMemory.content}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -152,30 +149,26 @@ export default function App() {
       <footer className="max-w-7xl w-full mx-auto pt-16 pb-24 border-t border-ui-border">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">
           <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Total Distance</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">1,280.4 <span className="text-sm opacity-60">KM</span></p>
+            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Max Dist.</p>
+            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">100<span className="text-sm opacity-60">KM</span></p>
           </div>
           <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">PB Record</p>
+            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">FM PB </p>
             <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">03:42:15</p>
-          </div>
-          <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Avg. Pace</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">05:32 <span className="text-sm opacity-60">/KM</span></p>
           </div>
           <div className="space-y-2">
             <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Completed Full</p>
             <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">04 <span className="text-sm opacity-60">RACES</span></p>
           </div>
+          <div className="space-y-2">
+            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">HM PB</p>
+            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">90:05:32 </p>
+          </div>
+          
         </div>
 
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase gap-4 text-center">
-          <div>Every mile tells a story. 由心而生的腳步</div>
-          <div className="flex gap-8">
-            <span className="hover:text-ink-primary cursor-pointer transition-colors">Archive</span>
-            <span className="hover:text-ink-primary cursor-pointer transition-colors">About</span>
-            <span className="hover:text-ink-primary cursor-pointer transition-colors">Stats</span>
-          </div>
+          <div>Every mile tells a story.</div>
         </div>
       </footer>
     </div>
