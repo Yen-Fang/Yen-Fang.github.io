@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif TC", serif;
+  
+  /* Clean Minimalism Color Palette */
+  --color-page-bg: #F9F8F5;
+  --color-ink-primary: #1A1A1A;
+  --color-ink-secondary: #2C2C2C;
+  --color-ink-muted: #524F48;
+  --color-ink-subtle: #8C887D;
+  --color-ink-extra-subtle: #A8A498;
+  --color-ui-border: #E5E2D9;
+}
+
+@layer base {
+  body {
+    @apply bg-page-bg text-ink-secondary font-serif antialiased;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-serif text-ink-primary tracking-tighter;
+  }
+}
+
+.memory-gradient {
+  background: linear-gradient(to bottom, rgba(249, 248, 245, 0) 0%, rgba(249, 248, 245, 1) 100%);
+}
