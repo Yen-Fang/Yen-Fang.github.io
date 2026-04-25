@@ -18,46 +18,22 @@ export default function App() {
   const prevMemory = currentIndex > 0 ? memories[currentIndex - 1] : null;
   const nextMemory = currentIndex < memories.length - 1 ? memories[currentIndex + 1] : null;
 
-  // Support for browser back button and mobile back swipe
-  useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      setSelectedId(event.state?.id || null);
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  const handleNavigate = (id: string | null) => {
-    if (id === selectedId) return;
-    
-    if (id) {
-      window.history.pushState({ id }, "", `#${id}`);
-    } else {
-      window.history.pushState(null, "", window.location.pathname);
-    }
-    
-    setSelectedId(id);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  };
-
   return (
     <div className="min-h-screen bg-page-bg selection:bg-ink-primary selection:text-white px-6 md:px-16 flex flex-col">
       {/* Navigation / Header Section */}
       <header className="max-w-7xl w-full mx-auto pt-16 pb-8 border-b border-ui-border flex flex-col md:flex-row justify-between items-baseline gap-4">
         <div 
-          onClick={() => handleNavigate(null)} 
+          onClick={() => setSelectedId(null)} 
           className="cursor-pointer group"
         >
-          <h1 className="text-4xl font-light tracking-tighter mb-1 select-none group-hover:opacity-70 transition-opacity text-ink-primary font-serif">
-            步履隨筆 <span className="text-xl text-ink-subtle ml-4 italic font-serif">Marathon Memories</span>
+          <h1 className="text-4xl font-light tracking-tighter mb-1 select-none group-hover:opacity-70 transition-opacity">
+            小籃子的百馬隨筆 <span className="text-xl text-ink-subtle ml-4 italic font-serif">Marathon Memories</span>
           </h1>
           <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase">記錄奔跑中的每一次呼吸與思考</p>
         </div>
         <div className="text-left md:text-right font-sans">
-          <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2024</span>
-          <span className="text-sm text-ink-muted">台北 / 台灣</span>
+          <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2016</span>
+          <span className="text-sm text-ink-muted">南投 / 台灣</span>
         </div>
       </header>
 
@@ -71,12 +47,12 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.6 }}
-              className="flex flex-col"
+              className="flex flex-col divide-y divide-ui-border"
             >
-              {memories.map((memory) => (
+              {memories.map((memory, index) => (
                 <div
                   key={memory.id}
-                  onClick={() => handleNavigate(memory.id)}
+                  onClick={() => setSelectedId(memory.id)}
                   className="group relative py-16 flex flex-col md:flex-row md:items-center justify-between cursor-pointer transition-all px-8 -mx-8 rounded-xl overflow-hidden mb-4"
                 >
                   {/* Background Image Layer */}
@@ -116,7 +92,7 @@ export default function App() {
               className="flex flex-col"
             >
               <button 
-                onClick={() => handleNavigate(null)}
+                onClick={() => setSelectedId(null)}
                 className="flex items-center gap-2 text-xs font-sans tracking-widest text-ink-subtle hover:text-ink-primary mb-12 uppercase cursor-pointer"
               >
                  ← 返回目錄
@@ -160,7 +136,7 @@ export default function App() {
                   {/* Long Form Content */}
                   {selectedMemory?.content && (
                     <div className="pt-4">
-                      <div className="text-lg text-ink-muted leading-[1.8] text-justify space-y-6 whitespace-pre-line font-light font-serif">
+                      <div className="text-lg text-ink-muted leading-[1.8] text-justify space-y-6 whitespace-pre-line font-light">
                         {selectedMemory.content}
                       </div>
                     </div>
@@ -171,7 +147,7 @@ export default function App() {
                 <div className="mt-20 pt-12 border-t border-ui-border flex justify-between items-center group">
                   {prevMemory ? (
                     <button 
-                      onClick={() => handleNavigate(prevMemory.id)}
+                      onClick={() => setSelectedId(prevMemory.id)}
                       className="flex flex-col items-start gap-2 max-w-[45%] text-left group/prev cursor-pointer"
                     >
                       <span className="text-[10px] tracking-widest text-ink-extra-subtle uppercase">Previous Entry</span>
@@ -183,7 +159,7 @@ export default function App() {
 
                   {nextMemory ? (
                     <button 
-                      onClick={() => handleNavigate(nextMemory.id)}
+                      onClick={() => setSelectedId(nextMemory.id)}
                       className="flex flex-col items-end gap-2 max-w-[45%] text-right group/next cursor-pointer"
                     >
                       <span className="text-[10px] tracking-widest text-ink-extra-subtle uppercase">Next Entry</span>
@@ -203,20 +179,20 @@ export default function App() {
       <footer className="max-w-7xl w-full mx-auto pt-16 pb-24 border-t border-ui-border">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">
           <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Max Dist.</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">100 <span className="text-sm opacity-60">KM</span></p>
+            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Total Distance</p>
+            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">1,280.4 <span className="text-sm opacity-60">KM</span></p>
           </div>
           <div className="space-y-2">
             <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">FM PB</p>
             <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">03:42:15</p>
           </div>
           <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Completed Full</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">04 <span className="text-sm opacity-60">RACES</span></p>
-          </div>
-          <div className="space-y-2">
             <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">HM PB</p>
             <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">90:05:32</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Completed Full</p>
+            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">04 <span className="text-sm opacity-60">RACES</span></p>
           </div>
         </div>
 
