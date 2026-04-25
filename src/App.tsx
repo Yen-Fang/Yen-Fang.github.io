@@ -33,7 +33,6 @@ export default function App() {
         </div>
         <div className="text-left md:text-right font-sans">
           <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2016</span>
-          
         </div>
       </header>
 
@@ -148,26 +147,36 @@ export default function App() {
                   {prevMemory ? (
                     <button 
                       onClick={() => setSelectedId(prevMemory.id)}
-                      className="flex flex-col items-start gap-2 max-w-[45%] text-left group/prev cursor-pointer"
+                      className="flex flex-col items-start gap-2 max-w-[30%] text-left group/prev cursor-pointer"
                     >
                       <span className="text-[10px] tracking-widest text-ink-extra-subtle uppercase">Previous Entry</span>
                       <span className="text-lg font-medium text-ink-subtle group-hover/prev:text-ink-primary transition-colors line-clamp-1">
                         ← {prevMemory.title}
                       </span>
                     </button>
-                  ) : <div />}
+                  ) : <div className="w-[30%]" />}
+
+                  <button 
+                    onClick={() => setSelectedId(null)}
+                    className="flex flex-col items-center gap-2 text-center group/dir cursor-pointer"
+                  >
+                    <span className="text-[10px] tracking-widest text-ink-extra-subtle uppercase">Directory</span>
+                    <span className="text-lg font-medium text-ink-subtle group-hover/dir:text-ink-primary transition-colors">
+                      返回目錄
+                    </span>
+                  </button>
 
                   {nextMemory ? (
                     <button 
                       onClick={() => setSelectedId(nextMemory.id)}
-                      className="flex flex-col items-end gap-2 max-w-[45%] text-right group/next cursor-pointer"
+                      className="flex flex-col items-end gap-2 max-w-[30%] text-right group/next cursor-pointer"
                     >
                       <span className="text-[10px] tracking-widest text-ink-extra-subtle uppercase">Next Entry</span>
                       <span className="text-lg font-medium text-ink-subtle group-hover/next:text-ink-primary transition-colors line-clamp-1">
                         {nextMemory.title} →
                       </span>
                     </button>
-                  ) : <div />}
+                  ) : <div className="w-[30%]" />}
                 </div>
               </div>
             </motion.div>
@@ -198,7 +207,6 @@ export default function App() {
 
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase gap-4 text-center">
           <div>Every mile tells a story.</div>
-
         </div>
       </footer>
     </div>
