@@ -27,13 +27,13 @@ export default function App() {
           className="cursor-pointer group"
         >
           <h1 className="text-4xl font-light tracking-tighter mb-1 select-none group-hover:opacity-70 transition-opacity">
-            小籃子的百馬隨筆 <span className="text-xl text-ink-subtle ml-4 italic font-serif">Marathon Memories</span>
+            小籃子的百馬隨筆
           </h1>
           <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase">記錄奔跑中的每一次呼吸與思考</p>
         </div>
         <div className="text-left md:text-right font-sans">
           <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2016</span>
-          <span className="text-sm text-ink-muted">南投 / 台灣</span>
+          
         </div>
       </header>
 
