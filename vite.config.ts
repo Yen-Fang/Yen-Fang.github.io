@@ -9,7 +9,7 @@ export default defineConfig(({mode}) => {
   return {
     // If you are deploying to https://<USERNAME>.github.io/<REPO>/, 
     // set base to '/<REPO>/'. For personal sites at the root, keep '/'
-    base:  '/marahon-memo/', 
+    base:  './', 
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
