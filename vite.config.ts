@@ -4,11 +4,12 @@ import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 
 export default defineConfig(({mode}) => {
+  
   const env = loadEnv(mode, '.', '');
   return {
     // If you are deploying to https://<USERNAME>.github.io/<REPO>/, 
     // set base to '/<REPO>/'. For personal sites at the root, keep '/'
-    base: './', 
+    base:  '/marahon-memo/', 
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
