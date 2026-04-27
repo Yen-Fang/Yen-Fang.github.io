@@ -18,6 +18,14 @@
 3. 在 Repository 的 **Settings > Pages** 中，將 Source 改為 **GitHub Actions**。
 4. 選擇 Vite 專用範本進行部署。
 
+## 內容編輯語法
+你可以在 `content` 使用以下語法：
+- **粗體**：使用 `**文字**`。
+- **小標題**：在此行的開頭使用 `## 小標題`。
+- **內嵌圖片**：使用 `[[img:索引:比例]]`。
+  - 索引：對應 `gallery` 陣列中的位置 (0, 1, 2...)。
+  - 比例：`full` (全寬), `wide` (91%), `medium` (75%), `small` (50%)。
+
 ## 本地開發
 ```bash
 npm install
