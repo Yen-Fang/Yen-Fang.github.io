@@ -110,9 +110,9 @@ export default function App() {
           className="cursor-pointer group"
         >
           <h1 className="text-4xl font-light tracking-tighter mb-1 select-none group-hover:opacity-70 transition-opacity">
-            跑步碎碎念
+            RunforRoses.log
           </h1>
-          <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase">記錄奔跑中的每一次呼吸與思考</p>
+          <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase">奔赴內心的繁盛</p>
         </div>
         <div className="text-left md:text-right font-sans">
           <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2023</span>
@@ -277,7 +277,7 @@ export default function App() {
         </div>
 
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase gap-4 text-center">
-          <div>Every mile tells a story.</div>
+          <div>跑步碎碎念</div>
         </div>
       </footer>
     </div>
