@@ -43,6 +43,6 @@ export const ehime260201: MarathonMemory = {
   ,
   imageUrl: "/image-260201-ehime/marathon260201-title.png",
   gallery: [
-    "/image-260201-ehime/marathon260201-1.jpeg"
+    "/image-260201-ehime/IMG_0088.jpeg"
   ]
 };
