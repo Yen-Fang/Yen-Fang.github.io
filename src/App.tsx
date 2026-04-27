@@ -142,7 +142,7 @@ export default function App() {
                     <img 
                       src={memory.imageUrl} 
                       alt="" 
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-30 transition-all duration-1000 scale-105 group-hover:scale-100"
+                      className="w-full h-full object-cover opacity-75 group-hover:opacity-50 transition-all duration-1000 scale-105 group-hover:scale-100"
                     />
                     <div className="absolute inset-0 bg-page-bg/20 group-hover:bg-transparent transition-colors duration-1000" />
                   </div>
