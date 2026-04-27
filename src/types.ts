@@ -8,4 +8,5 @@ export interface MarathonMemory {
   thoughts: string;
   content?: string;
   imageUrl: string;
+  gallery?: string[];
 }
