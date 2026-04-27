@@ -19,9 +19,9 @@ export const memory2: MarathonMemory = {
 [[img:1:full]]
 
 但也正是在那種極限的狀態下，我發現了隱藏在心底深處的意志力。那不只是跑步，那是對生活的縮影。`,
-  imageUrl: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200&auto=format&fit=crop",
+  imageUrl: "/public/image-260201-ehime/marathon260201-title.png",
   gallery: [
-    "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1474540412665-1cdae210ae6b?q=80&w=1200&auto=format&fit=crop"
+    "/public/image-260201-ehime/marathon260201-title.png",
+    "/public/image-260201-ehime/marathon260201-title.png"
   ]
 };//full100% wild90% medium70% small50%
