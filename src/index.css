@@ -7,9 +7,9 @@
   
   /* Clean Minimalism Color Palette */
   --color-page-bg: #F9F8F5;
-  --color-ink-primary: #1A1A1A;
+  --color-ink-primary: #000000;
   --color-ink-secondary: #2C2C2C;
-  --color-ink-muted: #524F48;
+  --color-ink-muted: #45433f; /* Slightly darker than before for reading */
   --color-ink-subtle: #8C887D;
   --color-ink-extra-subtle: #A8A498;
   --color-ui-border: #E5E2D9;
@@ -19,10 +19,13 @@
   body {
     @apply bg-page-bg text-ink-secondary font-serif antialiased;
   }
-  
-  h1, h2, h3, h4 {
-    @apply font-serif text-ink-primary tracking-tighter;
-  }
+}
+
+/* Medium-like Reading Experience */
+.article-content {
+  font-family: "Noto Serif TC", serif;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
 }
 
 .memory-gradient {
