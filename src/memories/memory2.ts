@@ -1,6 +1,6 @@
 import { MarathonMemory } from "../types";
 
-export const memory1: MarathonMemory = {
+export const memory2: MarathonMemory = {
   id: "1",
   title: "初馬的悸動",
   date: "2023.11.12",
