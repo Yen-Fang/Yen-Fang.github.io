@@ -112,10 +112,10 @@ export default function App() {
           <h1 className="text-4xl font-light tracking-tighter mb-1 select-none group-hover:opacity-70 transition-opacity">
             RunforRoses.log
           </h1>
-          <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase">奔赴內心的繁盛</p>
+          <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase"> 跑步碎碎念</p>
         </div>
         <div className="text-left md:text-right font-sans">
-          <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2023</span>
+          <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1"> SINCE 2023</span>
         </div>
       </header>
 
@@ -277,7 +277,7 @@ export default function App() {
         </div>
 
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase gap-4 text-center">
-          <div>跑步碎碎念</div>
+          <div>Run for Roses 靈感來源於 NMIXX 2024年專輯 Fe3O4: BREAK 收錄曲，象徵為了目標而奮不顧身地追求並無懼於挑戰。但個人意志力薄弱，只想要開心的跑步，所以將其詮釋為希望透過跑步，感受內心的繁盛以及生命力的恣意盛放</div>
         </div>
       </footer>
     </div>
