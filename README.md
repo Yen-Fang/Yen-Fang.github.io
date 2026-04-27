@@ -1,4 +1,4 @@
-# 馬拉松回憶錄 (Marathon Memories)
+# Marathon Memories
 
 這是一個基於 React + Vite + Tailwind CSS 的極簡馬拉松紀錄網站。
 
