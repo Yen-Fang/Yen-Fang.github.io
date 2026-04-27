@@ -51,10 +51,36 @@ function RichContent({ content, gallery }: { content?: string; gallery?: string[
           }
         }
 
-        // Standard text part
+        // Handle text with subheadings and bolding
+        const lines = part.split('\n');
         return (
-          <div key={index} className="whitespace-pre-line">
-            {part}
+          <div key={index} className="space-y-6">
+            {lines.map((line, lineIdx) => {
+              const trimmedLine = line.trim();
+              if (!trimmedLine) return <div key={lineIdx} className="h-4" />;
+              
+              // Subheading detection (## Title)
+              if (trimmedLine.startsWith('## ')) {
+                return (
+                  <h3 key={lineIdx} className="text-2xl font-medium pt-8 pb-2 text-ink-primary font-serif tracking-tight">
+                    {trimmedLine.slice(3)}
+                  </h3>
+                );
+              }
+
+              // Normal paragraph with bolding
+              const textParts = trimmedLine.split(/(\*\*.*?\*\*)/g);
+              return (
+                <p key={lineIdx} className="whitespace-pre-line leading-[1.8]">
+                  {textParts.map((t, i) => {
+                    if (t.startsWith('**') && t.endsWith('**')) {
+                      return <strong key={i} className="font-bold text-ink-primary">{t.slice(2, -2)}</strong>;
+                    }
+                    return t;
+                  })}
+                </p>
+              );
+            })}
           </div>
         );
       })}
@@ -157,7 +183,7 @@ export default function App() {
               <div className="max-w-4xl mx-auto flex flex-col space-y-12">
                 <div className="space-y-6">
                   <span className="text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase block">
-                    Memory Entry / {selectedMemory?.date}
+                    Memo / {selectedMemory?.date}
                   </span>
                   <h2 className="text-5xl font-medium leading-[1.2] text-ink-primary mb-6">
                     {selectedMemory?.title}
@@ -238,8 +264,8 @@ export default function App() {
       </main>
 
       {/* Footer / Stats Section */}
-      <footer className="max-w-7xl w-full mx-auto pt-16 pb-24 border-t border-ui-border">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">
+      <footer className="max-w-7xl w-full mx-auto pt-16 pb-24 border-t border-ui-border flex flex-col items-center">
+        <div className="flex flex-wrap justify-center gap-x-16 gap-y-12 text-center">
           <div className="space-y-2">
             <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">FM PB</p>
             <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">03:55:08</p>
@@ -248,7 +274,6 @@ export default function App() {
             <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Completed Full</p>
             <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">06 <span className="text-sm opacity-60">RACES</span></p>
           </div>
-
         </div>
 
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase gap-4 text-center">
