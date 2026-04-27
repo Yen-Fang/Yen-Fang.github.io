@@ -5,9 +5,62 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Calendar, MapPin, Award, Plus, Camera, Feather } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { INITIAL_MEMORIES, MarathonMemory } from "./data";
 import { MarathonMemory as MemoryType } from "./types";
+import React from "react";
+
+function RichContent({ content, gallery }: { content?: string; gallery?: string[] }) {
+  if (!content) return null;
+
+  // Split content by placeholder [[img:INDEX:SIZE]]
+  const parts = content.split(/(\[\[img:\d+(?::\w+)?\]\])/g);
+
+  return (
+    <div className="article-content text-[21px] text-ink-primary text-justify space-y-8 font-light">
+      {parts.map((part, index) => {
+        const match = part.match(/\[\[img:(\d+)(?::(\w+))?\]\]/);
+        if (match && gallery) {
+          const imgIndex = parseInt(match[1], 10);
+          const size = match[2] || 'full';
+          
+          let sizeClass = "w-full";
+          if (size === 'wide') sizeClass = "w-11/12 mx-auto";
+          if (size === 'medium') sizeClass = "w-3/4 mx-auto";
+          if (size === 'small') sizeClass = "w-1/2 mx-auto";
+
+          if (gallery[imgIndex]) {
+            return (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className={`my-12 relative overflow-hidden bg-ui-border/20 shadow-xl ${sizeClass}`}
+              >
+                <div className="aspect-[16/9]">
+                  <img
+                    src={gallery[imgIndex]}
+                    alt={`Inline ${imgIndex}`}
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </motion.div>
+            );
+          }
+        }
+
+        // Standard text part
+        return (
+          <div key={index} className="whitespace-pre-line">
+            {part}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -18,6 +71,10 @@ export default function App() {
   const prevMemory = currentIndex > 0 ? memories[currentIndex - 1] : null;
   const nextMemory = currentIndex < memories.length - 1 ? memories[currentIndex + 1] : null;
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [selectedId]);
+
   return (
     <div className="min-h-screen bg-page-bg selection:bg-ink-primary selection:text-white px-6 md:px-16 flex flex-col">
       {/* Navigation / Header Section */}
@@ -27,12 +84,12 @@ export default function App() {
           className="cursor-pointer group"
         >
           <h1 className="text-4xl font-light tracking-tighter mb-1 select-none group-hover:opacity-70 transition-opacity">
-            小籃子的百馬隨筆
+            跑步碎碎念
           </h1>
           <p className="text-ink-subtle text-xs tracking-[0.2em] font-sans uppercase">記錄奔跑中的每一次呼吸與思考</p>
         </div>
         <div className="text-left md:text-right font-sans">
-          <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2016</span>
+          <span className="text-[10px] tracking-[0.3em] text-ink-extra-subtle block mb-1">SINCE 2023</span>
         </div>
       </header>
 
@@ -69,7 +126,7 @@ export default function App() {
                       <span className="text-xs font-sans tracking-[0.2em] text-ink-extra-subtle uppercase w-32">
                         {memory.date}
                       </span>
-                      <h2 className="text-3xl font-medium text-ink-primary group-hover:translate-x-2 transition-transform duration-700">
+                      <h2 className="text-3xl font-medium text-ink-primary/60 group-hover:text-ink-primary group-hover:translate-x-2 transition-all duration-700">
                         {memory.title}
                       </h2>
                     </div>
@@ -115,14 +172,14 @@ export default function App() {
                     </div>
                   </div>
                   
-                  {/* Highlighted Thoughts (No italic as requested) */}
-                  <div className="pt-8 border-t border-ui-border">
-                    <p className="text-2xl text-ink-primary font-medium leading-[1.6] text-justify font-serif">
+                  {/* Highlighted Thoughts (Follows Medium lead style) */}
+                  <div className="pt-10 border-t border-ui-border">
+                    <p className="text-[21px] text-ink-primary font-medium italic leading-[1.8] text-justify font-serif">
                       {selectedMemory?.thoughts}
                     </p>
                   </div>
 
-                  {/* Image in the middle - No grayscale */}
+                  {/* Main Image */}
                   <div className="relative aspect-[16/9] overflow-hidden bg-ui-border/20 shadow-2xl shadow-black/5">
                     <img
                       src={selectedMemory?.imageUrl}
@@ -132,14 +189,10 @@ export default function App() {
                     />
                   </div>
 
-                  {/* Long Form Content */}
-                  {selectedMemory?.content && (
-                    <div className="pt-4">
-                      <div className="text-lg text-ink-muted leading-[1.8] text-justify space-y-6 whitespace-pre-line font-light">
-                        {selectedMemory.content}
-                      </div>
-                    </div>
-                  )}
+                  {/* Long Form Content with Inline Images */}
+                  <div className="pt-2">
+                    <RichContent content={selectedMemory?.content} gallery={selectedMemory?.gallery} />
+                  </div>
                 </div>
 
                 {/* Bottom Navigation for Memories */}
@@ -188,21 +241,14 @@ export default function App() {
       <footer className="max-w-7xl w-full mx-auto pt-16 pb-24 border-t border-ui-border">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">
           <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Total Distance</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">1,280.4 <span className="text-sm opacity-60">KM</span></p>
-          </div>
-          <div className="space-y-2">
             <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">FM PB</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">03:42:15</p>
-          </div>
-          <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">HM PB</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">90:05:32</p>
+            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">03:55:08</p>
           </div>
           <div className="space-y-2">
             <p className="text-[10px] tracking-[0.2em] text-ink-extra-subtle font-sans uppercase">Completed Full</p>
-            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">04 <span className="text-sm opacity-60">RACES</span></p>
+            <p className="text-4xl font-light font-sans tracking-tight text-ink-primary">06 <span className="text-sm opacity-60">RACES</span></p>
           </div>
+
         </div>
 
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-ink-extra-subtle font-sans tracking-[0.3em] uppercase gap-4 text-center">
