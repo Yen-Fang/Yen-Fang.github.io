@@ -1,8 +1,8 @@
 import { MarathonMemory } from "./types";
-import { memory1 } from "./memories/memory1";
+import { memory1 } from "./memories/260201-ehime";
 
 
 export const INITIAL_MEMORIES: MarathonMemory[] = [
-  memory1
+  260201-ehime
 ];
 
